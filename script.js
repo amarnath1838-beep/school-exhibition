@@ -145,7 +145,7 @@ respondToJarvis(question);
 
 }
 
-function respondToJarvis(question) {
+async function respondToJarvis(question) {
 const messages = document.getElementById("chat-messages");
 
 const userMessage = document.createElement("div");
@@ -153,12 +153,34 @@ userMessage.className = "user-message";
 userMessage.textContent = question;
 messages.appendChild(userMessage);
 
-const answer = getJarvisAnswer(question);
-
 const botMessage = document.createElement("div");
 botMessage.className = "bot-message";
-botMessage.textContent = answer;
+botMessage.textContent = "JARVIS is thinking...";
 messages.appendChild(botMessage);
+
+messages.scrollTop = messages.scrollHeight;
+
+try {
+    const response = await fetch("/.netlify/functions/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: question })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.error || "AI request failed");
+    }
+
+    botMessage.textContent = data.answer;
+} catch (error) {
+    console.error("JARVIS error:", error);
+    botMessage.textContent =
+        "I'm having trouble connecting to my AI brain. Please try again.";
+}
 
 messages.scrollTop = messages.scrollHeight;
 

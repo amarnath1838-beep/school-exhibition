@@ -39,7 +39,7 @@ exports.handler = async function (event) {
                 body: JSON.stringify({
                     systemInstruction: {
                         parts: [{
-                            text: "You are JARVIS, a friendly, helpful AI assistant for a school exhibition website. Give clear, concise, age-appropriate answers. Explain educational topics simply. Never claim to control the user's device or access information you do not have."
+                            text: "You are JARVIS, a friendly and helpful AI assistant for a school exhibition. Answer the user's question directly and clearly. Never begin every response with Hello or Hi. Only greet the user when they greet you first. Keep answers concise, accurate, and suitable for students. For current facts that may have changed, avoid guessing."
                         }]
                     },
                     contents: [{

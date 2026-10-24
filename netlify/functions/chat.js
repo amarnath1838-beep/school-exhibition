@@ -69,20 +69,29 @@ error: "Gemini API error " + response.status + ": " +
         }
 
         const answer = data.candidates?.[0]?.content?.parts
-            ?.map(part => part.text || "")
-            .join("")
-            .trim();
+    ?.map(part => part.text || "")
+    .join("")
+    .trim();
 
-        return {
-            statusCode: 200,
-            headers: {
-                "Content-Type": "application/json",
-                "Cache-Control": "no-store"
-            },
-            body: JSON.stringify({
-                reply: answer || "I couldn't generate an answer. Please try again."
-            })
-        };
+if (!answer) {
+    console.error("Gemini returned no text:", JSON.stringify(data));
+    return {
+        statusCode: 502,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            error: "Google returned no answer. Please try again."
+        })
+    };
+}
+
+return {
+    statusCode: 200,
+    headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store"
+    },
+    body: JSON.stringify({ answer })
+};
 
     } catch (error) {
         console.error("JARVIS function error:", error);

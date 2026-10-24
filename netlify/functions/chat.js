@@ -57,14 +57,15 @@ exports.handler = async function (event) {
         const data = await response.json();
 
         if (!response.ok) {
-            console.error("Gemini API error:", response.status, data);
-            return {
-                statusCode: 502,
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    error: "Gemini couldn't answer right now. Please try again."
-                })
-            };
+console.error("Gemini API error:", response.status, JSON.stringify(data));
+return {
+statusCode: 502,
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({
+error: "Gemini API error " + response.status + ": " +
+(data.error?.message || "Unknown API error")
+})
+};
         }
 
         const answer = data.candidates?.[0]?.content?.parts

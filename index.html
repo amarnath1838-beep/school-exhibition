@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050816">
+    <title>Welcome To Exhibition!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body><div class="background-glow"></div>
+
+<!-- WELCOME PAGE -->
+<main id="welcome-page" class="welcome-container">
+
+    <div class="logo-box">
+        <img src="school-logo.png" alt="School Logo" class="school-logo">
+    </div>
+
+    <p class="eyebrow">INNOVATION • CREATIVITY • TECHNOLOGY</p>
+
+    <h1>
+        Welcome To<br>
+        <span>Exhibition!</span>
+    </h1>
+
+    <p class="description">
+        Welcome to our School Exhibition! Step into the exciting world
+        of technology, where innovation meets creativity. Explore
+        interactive educational games, discover the fascinating world
+        of Artificial Intelligence through an engaging visual presentation,
+        and interact with JARVIS, our futuristic AI assistant, to learn
+        more about modern technology. Our website makes learning fun,
+        informative, and interactive for everyone. Join us on this
+        journey into the future of technology!
+    </p>
+
+    <button class="start-button" onclick="startExhibition()">
+        <span>START EXPLORING</span>
+        <span class="arrow">→</span>
+    </button>
+
+    <footer class="bottom-info">
+        <div class="line"></div>
+        <p>MADE WITH PASSION BY</p>
+        <h3>Aditya <span>•</span> Ayush <span>•</span> Prem</h3>
+        <small>SCHOOL EXHIBITION PROJECT</small>
+    </footer>
+
+</main>
+
+
+<!-- MAIN MENU -->
+<main id="main-menu" class="main-menu hidden">
+
+    <p class="eyebrow">YOUR JOURNEY STARTS HERE</p>
+
+    <h2>Explore <span>Our World</span></h2>
+
+    <p class="menu-description">
+        Choose an experience and discover something amazing.
+    </p>
+
+    <div class="menu-grid">
+
+        <button class="menu-card" onclick="openSection('games')">
+            <span class="menu-icon">🎮</span>
+            <h3>Educational Games</h3>
+            <p>Play interactive games, test your knowledge,
+               and challenge your mind.</p>
+            <span class="card-arrow">EXPLORE →</span>
+        </button>
+
+        <button class="menu-card" onclick="openSection('presentation')">
+            <span class="menu-icon">🤖</span>
+            <h3>AI Presentation</h3>
+            <p>Discover Artificial Intelligence and explore
+               how it is changing our world.</p>
+            <span class="card-arrow">DISCOVER →</span>
+        </button>
+
+    </div>
+
+    <button class="back-button" onclick="goHome()">
+        ← BACK TO WELCOME
+    </button>
+
+</main>
+  
+
+<!-- AI PRESENTATION PAGE -->
+<section id="presentation-page" class="presentation-page hidden">
+
+    <h1>AI <span>PRESENTATION</span></h1>
+
+    <p class="presentation-description">
+        Discover Artificial Intelligence and how it is changing our world.
+    </p>
+
+    <div class="video-container">
+        <iframe
+            id="ai-presentation-video"
+            src="https://www.youtube-nocookie.com/embed/ad79nYk2keg?playsinline=1"
+            title="Artificial Intelligence Presentation"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <button class="back-button" onclick="closePresentation()">
+        ← BACK TO MENU
+    </button>
+
+</section>
+  <!-- JARVIS FLOATING BUBBLE -->
+<button id="jarvis-bubble"
+        class="jarvis-bubble"
+        onclick="openJarvis()"
+        aria-label="Open JARVIS AI">
+
+    <img src="jarvis-logo.jpg" alt="JARVIS AI">
+
+    <span class="jarvis-status"></span>
+</button>
+
+
+<!-- JARVIS CHAT PANEL -->
+<section id="jarvis-panel" class="jarvis-panel hidden"
+         aria-label="JARVIS AI Assistant">
+
+    <div class="jarvis-header">
+        <img src="jarvis-logo.jpg" alt="JARVIS">
+        <div>
+            <h3>JARVIS AI</h3>
+            <p><span class="online-dot"></span> Exhibition Assistant</p>
+        </div>
+        <button class="close-chat" onclick="closeJarvis()"
+                aria-label="Close JARVIS">×</button>
+    </div>
+
+    <div class="chat-messages" id="chat-messages">
+        <div class="bot-message">
+            Hello! I am JARVIS, your exhibition assistant.
+            Choose a question below to get started!
+        </div>
+    </div>
+
+    <div class="suggestions">
+        <button onclick="askJarvis('What is Artificial Intelligence?')">
+            What is AI?
+        </button>
+        <button onclick="askJarvis('How does AI work?')">
+            How does AI work?
+        </button>
+        <button onclick="askJarvis('Where is AI used?')">
+            Uses of AI
+        </button>
+        <button onclick="askJarvis('What is machine learning?')">
+            Machine learning
+        </button>
+    </div>
+
+    <form class="chat-input" onsubmit="sendMessage(event)">
+        <input id="chat-input"
+               type="text"
+               placeholder="Ask JARVIS something..."
+               autocomplete="off"
+               aria-label="Type your question">
+        <button type="submit" aria-label="Send message">➤</button>
+    </form>
+
+</section>
+
+<!-- ============================= -->
+<!-- EDUCATIONAL QUIZ SYSTEM -->
+<!-- ============================= -->
+
+<section id="quiz-page" class="quiz-page" style="display: none;">
+
+    <!-- QUIZ CATEGORY MENU -->
+    <div id="quiz-menu" class="quiz-menu">
+
+        <h1>KNOWLEDGE <span>ARENA</span></h1>
+
+        <p class="quiz-subtitle">
+            CHOOSE YOUR CHALLENGE
+        </p>
+
+        <div class="quiz-category-grid">
+
+            <button class="quiz-category science-card"
+                onclick="startQuiz('science')">
+                <span class="quiz-icon">🔬</span>
+                <h2>SCIENCE</h2>
+                <p>Explore the world of science.</p>
+                <span class="quiz-start-label">START QUIZ →</span>
+            </button>
+
+            <button class="quiz-category ai-card"
+                onclick="startQuiz('ai')">
+                <span class="quiz-icon">🤖</span>
+                <h2>ARTIFICIAL INTELLIGENCE</h2>
+                <p>Test your knowledge of AI.</p>
+                <span class="quiz-start-label">START QUIZ →</span>
+            </button>
+
+            <button class="quiz-category sst-card"
+                onclick="startQuiz('sst')">
+                <span class="quiz-icon">🌍</span>
+                <h2>SOCIAL STUDIES</h2>
+                <p>History, Geography, Civics and Economics.</p>
+                <span class="quiz-start-label">START QUIZ →</span>
+            </button>
+
+        </div>
+
+        <button class="quiz-back-button" onclick="goHome()">
+            ← BACK TO HOME
+        </button>
+
+    </div>
+
+
+    <!-- QUESTION SCREEN -->
+    <div id="quiz-game" class="quiz-game" style="display: none;">
+
+        <div class="quiz-topbar">
+            <button onclick="exitQuiz()" class="quiz-exit-button">
+                ✕ EXIT
+            </button>
+
+            <span id="quiz-category-name">SCIENCE</span>
+
+            <span id="quiz-score">SCORE: 0</span>
+        </div>
+
+        <div class="quiz-progress-track">
+            <div id="quiz-progress" class="quiz-progress"></div>
+        </div>
+
+        <p id="quiz-question-number" class="quiz-question-number">
+            QUESTION 1 OF 10
+        </p>
+
+        <h2 id="quiz-question" class="quiz-question">
+            Loading question...
+        </h2>
+
+        <div id="quiz-options" class="quiz-options">
+
+            <button class="quiz-option" onclick="selectAnswer(0)">
+                <span>A</span>
+                <span class="option-text"></span>
+            </button>
+
+            <button class="quiz-option" onclick="selectAnswer(1)">
+                <span>B</span>
+                <span class="option-text"></span>
+            </button>
+
+            <button class="quiz-option" onclick="selectAnswer(2)">
+                <span>C</span>
+                <span class="option-text"></span>
+            </button>
+
+            <button class="quiz-option" onclick="selectAnswer(3)">
+                <span>D</span>
+                <span class="option-text"></span>
+            </button>
+
+        </div>
+
+        <div id="quiz-feedback" class="quiz-feedback"
+            style="display: none;">
+
+            <h3 id="quiz-feedback-title"></h3>
+
+            <p id="quiz-explanation"></p>
+
+        </div>
+
+        <button id="quiz-next-button"
+            class="quiz-next-button"
+            onclick="nextQuestion()"
+            style="display: none;">
+
+            NEXT QUESTION →
+
+        </button>
+
+    </div>
+
+
+    <!-- FINAL RESULTS SCREEN -->
+    <div id="quiz-results" class="quiz-results"
+        style="display: none;">
+
+        <div class="results-icon">🏆</div>
+
+        <h1>QUIZ COMPLETED</h1>
+
+        <p id="quiz-final-score" class="quiz-final-score"></p>
+
+        <h2 id="quiz-final-message"></h2>
+
+        <p id="quiz-final-detail"></p>
+
+        <button onclick="startQuiz(currentQuizCategory)"
+            class="quiz-replay-button">
+            ↻ PLAY AGAIN
+        </button>
+
+        <button onclick="showQuizMenu()"
+            class="quiz-menu-button">
+            CHOOSE ANOTHER QUIZ
+        </button>
+
+        <button onclick="goHome()" class="quiz-back-button">
+            ← BACK TO HOME
+        </button>
+
+    </div>
+
+</section>
+  <script src="script.js"></script>
+
+</body>
+</html>

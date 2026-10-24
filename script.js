@@ -178,8 +178,7 @@ try {
     botMessage.textContent = data.answer;
 } catch (error) {
     console.error("JARVIS error:", error);
-    botMessage.textContent =
-        "I'm having trouble connecting to my AI brain. Please try again.";
+    botMessage.textContent = error.message || "Unknown error";
 }
 
 messages.scrollTop = messages.scrollHeight;
